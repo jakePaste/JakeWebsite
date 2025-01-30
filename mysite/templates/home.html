@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-center mt-5">
+    <div class="terminal">
+        <pre id="typing"></pre>
+        <span class="cursor">█</span>
+        <div class="scanlines"></div>
+    </div>
+</div>
+
+<!-- JavaScript for Typing Effect -->
+<script>
+    const text = `
+Initializing...
+Loading system files...
+Establishing secure connection...
+
+User: Jake Umstead
+Field: Data Analysis & Political Systems
+
+> Exploring trends, structures, and decision-making through data.
+> Access granted.
+`;
+
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 50); // Adjust typing speed here
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(type, 1000); // Delay before typing starts
+    });
+</script>
+
+<!-- CSS for Retro Terminal Look -->
+<style>
+    body {
+        background-color: black;
+        color: #00ff00;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: left;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .terminal {
+        position: relative;
+        width: 80%;
+        max-width: 800px;
+        background-color: black;
+        border: 2px solid #00ff00;
+        padding: 20px;
+        font-size: 16px;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        overflow: hidden;
+    }
+    .cursor {
+        animation: blink 0.8s infinite;
+        color: #00ff00;
+    }
+    @keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    .scanlines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 255, 0, 0.05) 50%
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 1;
+    }
+    #typing {
+        position: relative;
+        z-index: 2;
+        animation: textFlicker 3s linear infinite;
+    }
+    @keyframes textFlicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+</style>
+{% endblock %}

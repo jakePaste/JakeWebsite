@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 id="typing"></h1>
+    <p class="lead">_</p>
+</div>
+
+<script>
+    const text = "Jake Umstead - Data Analysis & Journalism";
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 100);
+        } else {
+            document.getElementById("typing").innerHTML += '<span class="blink">_</span>';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+</script>
+
+<style>
+    .blink {
+        animation: blink-animation 0.8s infinite;
+    }
+
+    @keyframes blink-animation {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+</style>
+{% endblock %}
